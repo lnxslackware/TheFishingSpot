@@ -1,0 +1,21 @@
+﻿@model ICollection<TheFishingSpot.Models.News>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var news in Model)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">@news.Title</h2>
+        </div>
+        <div class="panel-body">
+            @news.Content
+        </div>
+        <div class="panel-footer">
+            <p>Published on: <em>@news.PublishDate</em> By <em>@news.Author.UserName</em></p>
+        </div>
+    </div>
+}
