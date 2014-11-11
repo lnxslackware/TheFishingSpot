@@ -27,7 +27,7 @@ namespace TheFishingSpot.Web.Areas.News.Controllers
         // GET: News/Home
         public ActionResult Index()
         {
-            var allNews = this.data.News.All();
+            var allNews = this.data.News.All().OrderByDescending(n => n.PublishDate);
             return View(allNews.ToList());
         }
 
@@ -55,6 +55,42 @@ namespace TheFishingSpot.Web.Areas.News.Controllers
 
             ViewBag.Error = ModelState;
             return View("Create", model);
+        }
+
+        public ActionResult ShowDetails(int id)
+        {
+            var newsToDisplay = this.data.News.All().FirstOrDefault(n => n.Id == id);
+            if (newsToDisplay == null)
+            {
+                ViewBag.Error = "No news found";
+                return RedirectToAction("Index");
+            }
+
+            var viewModel = new NewsDetailedViewModel
+            {
+                Id = newsToDisplay.Id,
+                Title = newsToDisplay.Title,
+                Content = newsToDisplay.Content,
+                PublishDate = newsToDisplay.PublishDate,
+                AuthorName = newsToDisplay.Author.UserName,
+                Comments = newsToDisplay.Comments.AsQueryable().Select(CommentViewModel.FromComment).ToList()
+            };
+
+            return View(viewModel);
+        }
+
+        public ActionResult ShowComments(int id)
+        {
+            var comments = this.data.News.All().FirstOrDefault(n => n.Id == id)
+                .Comments.AsQueryable().Select(CommentViewModel.FromComment).ToList();
+            if (comments == null)
+            {
+                ViewBag.Error = "Unallowed call";
+                return RedirectToAction("Index");
+            }
+
+            //return this.Content("test");
+            return PartialView("_ShowComments", comments);
         }
     }
 }

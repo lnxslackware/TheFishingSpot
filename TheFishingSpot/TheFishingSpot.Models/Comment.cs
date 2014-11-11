@@ -9,7 +9,8 @@ namespace TheFishingSpot.Models
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public int AuthorId { get; set; }
+        public DateTime CommentDate { get; set; }
+        public string AuthorId { get; set; }
         public virtual ApplicationUser Author { get; set; }
         public int NewsId { get; set; }
         public virtual News News { get; set; }

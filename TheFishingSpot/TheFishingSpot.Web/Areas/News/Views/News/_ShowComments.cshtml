@@ -1,0 +1,12 @@
+﻿@using TheFishingSpot.Web.Areas.News.Models
+@model ICollection<CommentViewModel>
+
+@foreach(var comment in Model)
+{
+    <div class="panel">
+        <div class="panel-body">
+            @comment.Content
+        </div>
+        <p>Commented on: @comment.CommentDate By @comment.AuthorName</p>
+    </div>   
+}

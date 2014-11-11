@@ -9,7 +9,7 @@
 {
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h2 class="panel-title">@news.Title</h2>
+            <h2 class="panel-title">@Html.ActionLink(news.Title, "ShowDetails", new {id = news.Id})</h2>
         </div>
         <div class="panel-body">
             @news.Content

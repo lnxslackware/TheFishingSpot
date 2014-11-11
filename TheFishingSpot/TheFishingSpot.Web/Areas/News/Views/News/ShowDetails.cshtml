@@ -1,0 +1,21 @@
+﻿@model TheFishingSpot.Web.Areas.News.Models.NewsDetailedViewModel
+@{
+    ViewBag.Title = "ShowDetails";
+}
+
+<h2>@Model.Title Details</h2>
+
+<div class="jumbotron">
+    <p>@Model.Content</p>
+    <p>Published on: <em>@Model.PublishDate</em> By <em>@Model.AuthorName</em></p>
+
+    @Ajax.ActionLink("Show Comments", "ShowComments", new { id = Model.Id },
+    new AjaxOptions
+    {
+        UpdateTargetId = "comments",
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace
+    }, new { @class = "btn btn-primary btn-xs pull-right" })
+</div>
+<div id="comments">
+</div>
