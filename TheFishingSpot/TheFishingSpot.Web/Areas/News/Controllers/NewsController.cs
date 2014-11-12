@@ -15,10 +15,6 @@ namespace TheFishingSpot.Web.Areas.News.Controllers
         
         IFishingSpotData data;
 
-        public NewsController() : this(new TheFishingSpotData())
-        {
-        }
-
         public NewsController(IFishingSpotData data)
         {
             this.data = data;
