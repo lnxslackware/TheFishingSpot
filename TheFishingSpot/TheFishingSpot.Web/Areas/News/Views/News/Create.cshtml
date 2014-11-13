@@ -1,4 +1,4 @@
-﻿@model TheFishingSpot.Web.Areas.News.Models.NewsCreateViewModel
+﻿@model TheFishingSpot.Web.Areas.News.Models.NewsInputViewModel
 @{
     ViewBag.Title = "Create";
 }
@@ -12,6 +12,7 @@
 
 @using (Html.BeginForm("Add", "News", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+    @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

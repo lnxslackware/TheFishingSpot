@@ -6,11 +6,12 @@ using System.Web;
 
 namespace TheFishingSpot.Web.Areas.News.Models
 {
-    public class NewsCreateViewModel
+    public class NewsInputViewModel
     {
         [Required]
         public string Title { get; set; }
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
     }
 }

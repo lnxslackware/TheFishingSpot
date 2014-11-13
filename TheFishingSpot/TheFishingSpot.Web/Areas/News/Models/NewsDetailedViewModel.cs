@@ -1,31 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace TheFishingSpot.Web.Areas.News.Models
 {
-    using System.Linq;
-    using System.Linq.Expressions;
-    using TheFishingSpot.Models;
+    using System;
+    using System.Collections.Generic;
 
-    public class NewsDetailedViewModel
+    using AutoMapper;
+    using TheFishingSpot.Web.Infrastructure.Mapping;
+
+    public class NewsDetailedViewModel : IMapFrom<TheFishingSpot.Models.News>, IHaveCustomMappings
     {
-        public static Expression<Func<News, NewsDetailedViewModel>> FromNews
-        {
-            get
-            {
-                return n => new NewsDetailedViewModel()
-                {
-                    Id = n.Id,
-                    Title = n.Title,
-                    Content = n.Content,
-                    PublishDate = n.PublishDate,
-                    AuthorName = n.Author.UserName,
-                    Comments = n.Comments.AsQueryable().Select(CommentViewModel.FromComment).ToList()
-                };
-            }
-        }
+        //public static Expression<Func<News, NewsDetailedViewModel>> FromNews
+        //{
+        //    get
+        //    {
+        //        return n => new NewsDetailedViewModel()
+        //        {
+        //            Id = n.Id,
+        //            Title = n.Title,
+        //            Content = n.Content,
+        //            PublishDate = n.PublishDate,
+        //            AuthorName = n.Author.UserName,
+        //            Comments = n.Comments.AsQueryable().Select(CommentViewModel.FromComment).ToList()
+        //        };
+        //    }
+        //}
 
         public int Id { get; set; }
         public string Title { get; set; }
@@ -33,5 +31,11 @@ namespace TheFishingSpot.Web.Areas.News.Models
         public DateTime PublishDate { get; set; }
         public string AuthorName { get; set; }
         public ICollection<CommentViewModel> Comments { get; set; }
+
+        public virtual void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<TheFishingSpot.Models.News, NewsDetailedViewModel>()
+                .ForMember(vm => vm.AuthorName, opt => opt.MapFrom(n => n.Author.UserName));
+        }
     }
 }

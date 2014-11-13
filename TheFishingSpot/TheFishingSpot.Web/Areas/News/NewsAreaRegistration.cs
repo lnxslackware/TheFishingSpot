@@ -15,9 +15,15 @@ namespace TheFishingSpot.Web.Areas.News
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
+                "Comments",
+                "News/Comments/{action}/{id}",
+                new { controller = "Comments", action = "Index", id = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
                 "News_default",
-                "News/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "News/{action}/{id}",
+                new { controller = "News", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

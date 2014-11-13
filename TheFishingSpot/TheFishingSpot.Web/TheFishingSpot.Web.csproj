@@ -43,6 +43,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -181,13 +187,16 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\News\Controllers\CommentsController.cs" />
     <Compile Include="Areas\News\Controllers\NewsController.cs" />
-    <Compile Include="Areas\News\Models\CommentCreateViewModel.cs" />
+    <Compile Include="Areas\News\Models\CommentInputViewModel.cs" />
     <Compile Include="Areas\News\Models\CommentViewModel.cs" />
-    <Compile Include="Areas\News\Models\NewsCreateViewModel.cs" />
+    <Compile Include="Areas\News\Models\NewsInputViewModel.cs" />
     <Compile Include="Areas\News\Models\NewsDetailedViewModel.cs" />
+    <Compile Include="Areas\News\Models\NewsViewModel.cs" />
     <Compile Include="Areas\News\NewsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -213,12 +222,13 @@
     <Content Include="Areas\News\Views\News\Index.cshtml" />
     <Content Include="Areas\News\Views\News\Create.cshtml" />
     <Content Include="Areas\News\Views\News\ShowDetails.cshtml" />
-    <Content Include="Areas\News\Views\News\_ShowComments.cshtml" />
+    <Content Include="Areas\News\Views\Comments\_ShowComments.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\News\Views\Comments\_AddComment.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -279,6 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -292,6 +303,10 @@
     <ProjectReference Include="..\TheFishingSpot.Models\TheFishingSpot.Models.csproj">
       <Project>{ab4ab851-ac49-4cce-b0c9-a9fc538cd804}</Project>
       <Name>TheFishingSpot.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TheFishingSpot.Web.Infrastructure\TheFishingSpot.Web.Infrastructure.csproj">
+      <Project>{830481b0-f00a-4594-b1ac-82a568db6e38}</Project>
+      <Name>TheFishingSpot.Web.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -322,6 +337,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

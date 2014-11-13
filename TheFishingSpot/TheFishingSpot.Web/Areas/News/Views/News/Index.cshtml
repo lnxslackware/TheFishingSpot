@@ -1,4 +1,4 @@
-﻿@model ICollection<TheFishingSpot.Models.News>
+﻿@model ICollection<TheFishingSpot.Web.Areas.News.Models.NewsViewModel>
 @{
     ViewBag.Title = "Index";
 }
@@ -15,7 +15,7 @@
             @news.Content
         </div>
         <div class="panel-footer">
-            <p>Published on: <em>@news.PublishDate</em> By <em>@news.Author.UserName</em></p>
+            <p>Published on: <em>@news.PublishDate</em> By <em>@news.AuthorName</em></p>
         </div>
     </div>
 }

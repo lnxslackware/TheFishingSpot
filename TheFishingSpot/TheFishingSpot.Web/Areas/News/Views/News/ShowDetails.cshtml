@@ -8,14 +8,30 @@
 <div class="jumbotron">
     <p>@Model.Content</p>
     <p>Published on: <em>@Model.PublishDate</em> By <em>@Model.AuthorName</em></p>
+    <div class="row">
+        <p class="pull-right">
+            @Ajax.ActionLink("Show Comments", "ShowComments", "Comments", new { id = Model.Id },
+            new AjaxOptions
+            {
+                UpdateTargetId = "comments",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace
+            }, new { @class = "btn btn-primary btn-xs" })
 
-    @Ajax.ActionLink("Show Comments", "ShowComments", new { id = Model.Id },
-    new AjaxOptions
-    {
-        UpdateTargetId = "comments",
-        HttpMethod = "GET",
-        InsertionMode = InsertionMode.Replace
-    }, new { @class = "btn btn-primary btn-xs pull-right" })
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Ajax.ActionLink("Add Comment", "ShowAddCommentForm", "Comments", new { id = Model.Id },
+            new AjaxOptions
+            {
+                UpdateTargetId = "add-comment-form",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace
+            }, new { @class = "btn btn-primary btn-xs" })
+            }
+        </p>
+    </div>
+</div>
+<div id="add-comment-form">
 </div>
 <div id="comments">
 </div>

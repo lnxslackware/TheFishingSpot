@@ -22,20 +22,20 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li class="dropdown">
-                            @Html.ActionLink("News", "Index", "News", null, new { @class = "dropdown-toggle", data_toggle = "dropdown" })
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    @Html.ActionLink("All", "Index", "News", new { Area = "News" }, null)
-                                </li>
+                    <li class="dropdown">
+                        @Html.ActionLink("News", "Index", "News", null, new { @class = "dropdown-toggle", data_toggle = "dropdown" })
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                @Html.ActionLink("All", "Index", "News", new { Area = "News" }, null)
+                            </li>
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
                                 <li>
                                     @Html.ActionLink("Create", "Create", "News", new { Area = "News" }, null)
                                 </li>
-                            </ul>
-                        </li>
-                    }
+                            }
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>
                 </ul>

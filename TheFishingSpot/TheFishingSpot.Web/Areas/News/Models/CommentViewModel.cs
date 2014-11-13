@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace TheFishingSpot.Web.Areas.News.Models
+﻿namespace TheFishingSpot.Web.Areas.News.Models
 {
+    using System;
     using System.Linq.Expressions;
+
+    using AutoMapper;
+
     using TheFishingSpot.Models;
+    using TheFishingSpot.Web.Infrastructure.Mapping;
 
-    public class CommentViewModel
+    public class CommentViewModel : IMapFrom<Comment>, IHaveCustomMappings
     {
-        public static Expression<Func<Comment, CommentViewModel>> FromComment
-        {
-            get
-            {
-                return c => new CommentViewModel
-                {
-                    Content = c.Content,
-                    AuthorName = c.Author.UserName,
-                    CommentDate = c.CommentDate
-                };
-            }
-        }
-
         public string Content { get; set; }
         public string AuthorName { get; set; }
         public DateTime CommentDate { get; set; }
+
+        public virtual void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<Comment, CommentViewModel>()
+                .ForMember(vm => vm.AuthorName, opt => opt.MapFrom(n => n.Author.UserName));
+        }
     }
 }

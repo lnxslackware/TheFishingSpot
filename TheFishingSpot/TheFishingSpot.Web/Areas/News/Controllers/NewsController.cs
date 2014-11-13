@@ -6,33 +6,43 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using TheFishingSpot.Web.Areas.News.Models;
 using TheFishingSpot.Models;
+using AutoMapper.QueryableExtensions;
 using TheFishingSpot.Data;
+using TheFishingSpot.Web.Controllers;
 
 namespace TheFishingSpot.Web.Areas.News.Controllers
 {
-    public class NewsController : Controller
+    public class NewsController : BaseController
     {
-        
-        IFishingSpotData data;
+        private const int DefaultPageSize = 2;
 
         public NewsController(IFishingSpotData data)
+            :base(data)
         {
-            this.data = data;
         }
 
         // GET: News/Home
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(int page = 0)
         {
-            var allNews = this.data.News.All().OrderByDescending(n => n.PublishDate);
-            return View(allNews.ToList());
+            var allNews = this.Data.News.All()
+                .OrderByDescending(n => n.PublishDate)
+                .Project()
+                .To<NewsViewModel>()
+                .Skip(page * DefaultPageSize)
+                .Take(DefaultPageSize).ToList();
+            
+            return View(allNews);
         }
 
         public ActionResult Create()
         {
-            return View();
+            return View(new NewsInputViewModel());
         }
 
-        public ActionResult Add(NewsCreateViewModel model)
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(NewsInputViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -43,8 +53,9 @@ namespace TheFishingSpot.Web.Areas.News.Controllers
                     PublishDate = DateTime.Now,
                     AuthorId = this.User.Identity.GetUserId()
                 };
-                this.data.News.Add(news);
-                this.data.SaveChanges();
+
+                this.Data.News.Add(news);
+                this.Data.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -53,40 +64,31 @@ namespace TheFishingSpot.Web.Areas.News.Controllers
             return View("Create", model);
         }
 
+        [HttpGet]
         public ActionResult ShowDetails(int id)
         {
-            var newsToDisplay = this.data.News.All().FirstOrDefault(n => n.Id == id);
+            var newsToDisplay = this.Data.News.All().Where(n => n.Id == id);
             if (newsToDisplay == null)
             {
                 ViewBag.Error = "No news found";
                 return RedirectToAction("Index");
             }
 
-            var viewModel = new NewsDetailedViewModel
-            {
-                Id = newsToDisplay.Id,
-                Title = newsToDisplay.Title,
-                Content = newsToDisplay.Content,
-                PublishDate = newsToDisplay.PublishDate,
-                AuthorName = newsToDisplay.Author.UserName,
-                Comments = newsToDisplay.Comments.AsQueryable().Select(CommentViewModel.FromComment).ToList()
-            };
+            var viewModel = newsToDisplay.Project().To<NewsDetailedViewModel>().FirstOrDefault();
+            var a = 5;
+            //var viewModel = new NewsDetailedViewModel
+            //{
+            //    Id = newsToDisplay.Id,
+            //    Title = newsToDisplay.Title,
+            //    Content = newsToDisplay.Content,
+            //    PublishDate = newsToDisplay.PublishDate,
+            //    AuthorName = newsToDisplay.Author.UserName,
+            //    Comments = newsToDisplay.Comments
+            //        .AsQueryable()
+            //        .Project().To<CommentViewModel>().ToList()//.Select(CommentViewModel.FromComment).ToList()
+            //};
 
             return View(viewModel);
-        }
-
-        public ActionResult ShowComments(int id)
-        {
-            var comments = this.data.News.All().FirstOrDefault(n => n.Id == id)
-                .Comments.AsQueryable().Select(CommentViewModel.FromComment).ToList();
-            if (comments == null)
-            {
-                ViewBag.Error = "Unallowed call";
-                return RedirectToAction("Index");
-            }
-
-            //return this.Content("test");
-            return PartialView("_ShowComments", comments);
         }
     }
 }
