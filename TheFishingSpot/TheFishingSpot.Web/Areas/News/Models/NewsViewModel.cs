@@ -5,6 +5,7 @@ using System.Web;
 using AutoMapper;
 using TheFishingSpot.Models;
 using TheFishingSpot.Web.Infrastructure.Mapping;
+using System.Web.Mvc;
 
 namespace TheFishingSpot.Web.Areas.News.Models
 {
@@ -12,6 +13,7 @@ namespace TheFishingSpot.Web.Areas.News.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        [AllowHtml]
         public string Content { get; set; }
         public DateTime PublishDate { get; set; }
         public string AuthorName { get; set; }
