@@ -6,7 +6,7 @@
 <h2>@Model.Title Details</h2>
 
 <div class="jumbotron">
-    <p>@Model.Content</p>
+    <p>@Html.Raw(Model.Content)</p>
     <p>Published on: <em>@Model.PublishDate</em> By <em>@Model.AuthorName</em></p>
     <div class="row">
         <p class="pull-right">

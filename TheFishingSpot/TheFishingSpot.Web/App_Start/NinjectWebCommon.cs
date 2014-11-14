@@ -12,6 +12,7 @@ namespace TheFishingSpot.Web.App_Start
     using Ninject.Web.Common;
     using System.Data.Entity;
     using TheFishingSpot.Data;
+    using TheFishingSpot.Web.Infrastructure;
 
     public static class NinjectWebCommon 
     {
@@ -65,6 +66,7 @@ namespace TheFishingSpot.Web.App_Start
         {
             kernel.Bind<DbContext>().To<TheFishingSpotDbContext>();
             kernel.Bind<IFishingSpotData>().To<TheFishingSpotData>();
+            kernel.Bind<ISanitizer>().To<HtmlSanitizerAdapter>();
         }        
     }
 }

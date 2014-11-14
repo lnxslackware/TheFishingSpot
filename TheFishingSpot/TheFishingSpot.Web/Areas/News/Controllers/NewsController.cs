@@ -9,16 +9,19 @@ using TheFishingSpot.Models;
 using AutoMapper.QueryableExtensions;
 using TheFishingSpot.Data;
 using TheFishingSpot.Web.Controllers;
+using TheFishingSpot.Web.Infrastructure;
 
 namespace TheFishingSpot.Web.Areas.News.Controllers
 {
     public class NewsController : BaseController
     {
+        ISanitizer sanitizer;
         private const int DefaultPageSize = 2;
 
-        public NewsController(IFishingSpotData data)
+        public NewsController(IFishingSpotData data, ISanitizer sanitizer)
             :base(data)
         {
+            this.sanitizer = sanitizer;
         }
 
         // GET: News/Home
@@ -49,7 +52,7 @@ namespace TheFishingSpot.Web.Areas.News.Controllers
                 var news = new TheFishingSpot.Models.News()
                 {
                     Title = model.Title,
-                    Content = model.Content,
+                    Content = sanitizer.Sanitize(model.Content),
                     PublishDate = DateTime.Now,
                     AuthorId = this.User.Identity.GetUserId()
                 };
@@ -75,7 +78,6 @@ namespace TheFishingSpot.Web.Areas.News.Controllers
             }
 
             var viewModel = newsToDisplay.Project().To<NewsDetailedViewModel>().FirstOrDefault();
-            var a = 5;
             //var viewModel = new NewsDetailedViewModel
             //{
             //    Id = newsToDisplay.Id,
