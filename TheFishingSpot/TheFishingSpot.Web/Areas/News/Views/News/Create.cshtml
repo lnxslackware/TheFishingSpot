@@ -6,7 +6,6 @@
 <h2>Create News</h2>
 @if(ViewBag.Error != null)
 {
-    @*<div class="alert alert-danger">@ViewBag.Error.ToString()</div>*@
     @Html.ValidationSummary("", new { @class = "alert alert-danger" })
 }
 

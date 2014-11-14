@@ -1,25 +1,21 @@
 ﻿@model TheFishingSpot.Web.Areas.News.Models.CommentInputViewModel
 
-<div class="row">
-    <div class="col-md-3"></div>
-    @using (Ajax.BeginForm("AddComment", null,
+@using (Ajax.BeginForm("AddComment", null,
         new AjaxOptions
         {
             UpdateTargetId = "comments",
             InsertionMode = InsertionMode.Replace
-        }, new { @class = "form-horizontal text-center col-md-6", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <div class="form-group">
-            @Html.Hidden("NewsId", Model.NewsId)
-            @Html.LabelFor(c => c.Content, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(c => c.Content, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            <input class="btn btn-primary" type="submit" value="Add comment" />
-        </div>
-    }
-    <div class="col-md-3"></div>
-</div>
+        }, new { @class = "form-horizontal text-center", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.Hidden("NewsId", Model.NewsId)
+    </div>
+    <div class="form-group col-md-12">
+        @*@Html.LabelFor(c => c.Content, new { @class = "col-md-2 control-label" })*@
+        @Html.TextAreaFor(c => c.Content, new { @class = "form-control", rows = "5" })
+    </div>
+    <div class="row form-group">
+        <input class="btn btn-primary" type="submit" value="Add comment" />
+    </div>
+}
