@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace TheFishingSpot.Web.Areas.News.Models
+﻿namespace TheFishingSpot.Web.Areas.News.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+
     public class NewsInputViewModel
     {
         [Required]

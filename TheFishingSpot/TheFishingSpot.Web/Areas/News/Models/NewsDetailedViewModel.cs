@@ -5,6 +5,7 @@ namespace TheFishingSpot.Web.Areas.News.Models
     using System.Collections.Generic;
 
     using AutoMapper;
+
     using TheFishingSpot.Web.Infrastructure.Mapping;
 
     public class NewsDetailedViewModel : IMapFrom<TheFishingSpot.Models.News>, IHaveCustomMappings

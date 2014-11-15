@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using AutoMapper.QueryableExtensions;
-using TheFishingSpot.Data;
-using TheFishingSpot.Models;
-using TheFishingSpot.Web.Areas.News.Models;
-using TheFishingSpot.Web.Controllers;
-
-namespace TheFishingSpot.Web.Areas.News.Controllers
+﻿namespace TheFishingSpot.Web.Areas.News.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+    
+    using AutoMapper.QueryableExtensions;
+    using Microsoft.AspNet.Identity;
+    
+    using TheFishingSpot.Data;
+    using TheFishingSpot.Models;
+    using TheFishingSpot.Web.Areas.News.Models;
+    using TheFishingSpot.Web.Controllers;
+    
     public class CommentsController : BaseController
     {
         public CommentsController(IFishingSpotData data)

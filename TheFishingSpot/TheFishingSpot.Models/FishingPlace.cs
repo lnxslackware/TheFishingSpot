@@ -1,14 +1,13 @@
 namespace TheFishingSpot.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using System.ComponentModel.DataAnnotations;
 
     public class FishingPlace
     {
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public FishingPlaceType Type { get; set; }
     }
 }

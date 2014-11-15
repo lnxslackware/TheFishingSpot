@@ -1,10 +1,9 @@
 ﻿namespace TheFishingSpot.Web.Areas.News.Models
 {
     using System;
-    using System.Linq.Expressions;
 
     using AutoMapper;
-
+    
     using TheFishingSpot.Models;
     using TheFishingSpot.Web.Infrastructure.Mapping;
 

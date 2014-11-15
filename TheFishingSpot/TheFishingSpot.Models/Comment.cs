@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-
-namespace TheFishingSpot.Models
+﻿namespace TheFishingSpot.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class Comment
     {
         [Key]

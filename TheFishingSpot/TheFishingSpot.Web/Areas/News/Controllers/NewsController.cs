@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using TheFishingSpot.Web.Areas.News.Models;
-using TheFishingSpot.Models;
-using AutoMapper.QueryableExtensions;
-using TheFishingSpot.Data;
-using TheFishingSpot.Web.Controllers;
-using TheFishingSpot.Web.Infrastructure;
-
-namespace TheFishingSpot.Web.Areas.News.Controllers
+﻿namespace TheFishingSpot.Web.Areas.News.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+    
+    using AutoMapper.QueryableExtensions;
+    using Microsoft.AspNet.Identity;
+    
+    using TheFishingSpot.Data;
+    using TheFishingSpot.Web.Areas.News.Models;
+    using TheFishingSpot.Web.Controllers;
+    using TheFishingSpot.Web.Infrastructure;
+    
     public class NewsController : BaseController
     {
-        ISanitizer sanitizer;
+        private readonly ISanitizer sanitizer;
         private const int DefaultPageSize = 2;
+        private const int PreviewNewsContentDisplayLength = 200;
 
         public NewsController(IFishingSpotData data, ISanitizer sanitizer)
             :base(data)
@@ -34,10 +34,13 @@ namespace TheFishingSpot.Web.Areas.News.Controllers
                 .To<NewsViewModel>()
                 .Skip(page * DefaultPageSize)
                 .Take(DefaultPageSize).ToList();
+
+            allNews.ForEach(n => n.Content = TrimAndSanitizeContent(n.Content));
             
             return View(allNews);
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new NewsInputViewModel());
@@ -91,6 +94,19 @@ namespace TheFishingSpot.Web.Areas.News.Controllers
             //};
 
             return View(viewModel);
+        }
+
+
+        [NonAction]
+        private string TrimAndSanitizeContent(string content)
+        {
+            content = this.sanitizer.Sanitize(content);
+            if (content.Length > PreviewNewsContentDisplayLength)
+            {
+                return content.Substring(0, 200) + "...";
+            }
+
+            return content + "...";
         }
     }
 }

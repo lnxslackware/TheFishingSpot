@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoMapper;
-using TheFishingSpot.Models;
-using TheFishingSpot.Web.Infrastructure.Mapping;
-using System.Web.Mvc;
-
-namespace TheFishingSpot.Web.Areas.News.Models
+﻿namespace TheFishingSpot.Web.Areas.News.Models
 {
+    using System;
+    using System.Web.Mvc;
+
+    using AutoMapper;
+    
+    using TheFishingSpot.Web.Infrastructure.Mapping;
+
     public class NewsViewModel : IMapFrom<TheFishingSpot.Models.News>, IHaveCustomMappings
     {
         public int Id { get; set; }
