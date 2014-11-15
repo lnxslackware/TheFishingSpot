@@ -16,10 +16,15 @@
         public DateTime PublishDate { get; set; }
         public string AuthorName { get; set; }
 
+        public int CommentsCount { get; set; }
+
         public virtual void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<TheFishingSpot.Models.News, NewsViewModel>()
                 .ForMember(vm => vm.AuthorName, opt => opt.MapFrom(n => n.Author.UserName));
+
+            configuration.CreateMap<TheFishingSpot.Models.News, NewsViewModel>()
+                .ForMember(vm => vm.CommentsCount, opt => opt.MapFrom(n => n.Comments.Count));
         }
     }
 }

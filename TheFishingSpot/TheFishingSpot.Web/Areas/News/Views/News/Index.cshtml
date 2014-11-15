@@ -1,4 +1,4 @@
-﻿@model ICollection<TheFishingSpot.Web.Areas.News.Models.NewsViewModel>
+﻿@model IEnumerable<TheFishingSpot.Web.Areas.News.Models.NewsViewModel>
 @{
     ViewBag.Title = "Index";
 }
@@ -9,13 +9,16 @@
 {
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h2 class="panel-title">@Html.ActionLink(news.Title, "ShowDetails", new {id = news.Id})</h2>
+            <h2 class="panel-title">@Html.ActionLink(news.Title, "ShowDetails", new { id = news.Id })</h2>
         </div>
         <div class="panel-body">
             @news.Content
         </div>
         <div class="panel-footer">
-            <p>Published on: <em>@news.PublishDate</em> By <em>@news.AuthorName</em></p>
+            <p>
+                Published on: <em>@news.PublishDate</em> By <em>@news.AuthorName</em>
+                <span class="pull-right label label-info">@news.CommentsCount Comments</span>
+            </p>
         </div>
     </div>
 }

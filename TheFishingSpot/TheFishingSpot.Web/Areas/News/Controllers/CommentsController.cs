@@ -33,8 +33,7 @@
             var comments = news.Select(n => n.Comments)
                 .FirstOrDefault().AsQueryable()
                 .Project().To<CommentViewModel>()
-                .OrderByDescending(c => c.CommentDate)
-                .ToList();
+                .OrderByDescending(c => c.CommentDate);
             //var comments = this.Data.News.All()
             //    .FirstOrDefault(n => n.Id == id)
             //    .Comments.AsQueryable()
