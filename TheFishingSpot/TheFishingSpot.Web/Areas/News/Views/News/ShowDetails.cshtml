@@ -14,6 +14,7 @@
             new AjaxOptions
             {
                 UpdateTargetId = "comments",
+                LoadingElementId = "loader",
                 HttpMethod = "GET",
                 InsertionMode = InsertionMode.Replace
             }, new { @class = "btn btn-primary btn-xs" })
@@ -21,12 +22,13 @@
             @if (User.Identity.IsAuthenticated)
             {
                 @Ajax.ActionLink("Add Comment", "ShowAddCommentForm", "Comments", new { id = Model.Id },
-            new AjaxOptions
-            {
-                UpdateTargetId = "add-comment-form",
-                HttpMethod = "GET",
-                InsertionMode = InsertionMode.Replace
-            }, new { @class = "btn btn-primary btn-xs" })
+                new AjaxOptions
+                {
+                    UpdateTargetId = "add-comment-form",
+                    LoadingElementId = "loader",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace
+                }, new { @class = "btn btn-primary btn-xs" })
             }
         </p>
     </div>
@@ -35,6 +37,10 @@
 </div>
 <div id="comments">
 </div>
+<div id="loader">
+    <img src="~/Content/imgs/loader.gif" alt="loader gif" />
+</div>
+
 @section Scripts {
     @Scripts.Render("/Scripts/custom/clear-comment-form.js")
 }

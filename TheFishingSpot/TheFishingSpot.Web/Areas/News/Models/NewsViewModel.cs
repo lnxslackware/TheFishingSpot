@@ -1,8 +1,8 @@
 ﻿namespace TheFishingSpot.Web.Areas.News.Models
 {
     using System;
+    using System.Linq;
     using System.Web.Mvc;
-
     using AutoMapper;
     
     using TheFishingSpot.Web.Infrastructure.Mapping;
@@ -24,7 +24,7 @@
                 .ForMember(vm => vm.AuthorName, opt => opt.MapFrom(n => n.Author.UserName));
 
             configuration.CreateMap<TheFishingSpot.Models.News, NewsViewModel>()
-                .ForMember(vm => vm.CommentsCount, opt => opt.MapFrom(n => n.Comments.Count));
+                .ForMember(vm => vm.CommentsCount, opt => opt.MapFrom(n => n.Comments.Count()));
         }
     }
 }

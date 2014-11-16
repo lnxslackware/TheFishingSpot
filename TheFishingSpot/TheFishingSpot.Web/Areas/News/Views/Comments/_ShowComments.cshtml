@@ -1,14 +1,12 @@
 ﻿@using TheFishingSpot.Web.Areas.News.Models
 @model IEnumerable<CommentViewModel>
 
-@*<div class="panel panel-default">*@
-    @foreach (var comment in Model)
-    {
-        <div class="well">
-            <blockquote>
-                @comment.Content
-            </blockquote>
-            <footer><em>Commented on: @comment.CommentDate By @comment.AuthorName</em></footer>
-        </div>
-    }
-@*</div>*@
+@foreach (var comment in Model)
+{
+    <div class="well">
+        <blockquote>
+            @comment.Content
+        </blockquote>
+        <footer><em>Commented on: @comment.CommentDate By @comment.AuthorName</em></footer>
+    </div>
+}

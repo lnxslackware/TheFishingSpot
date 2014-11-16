@@ -66,7 +66,7 @@
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Error = ModelState;
+            ViewBag.Error = true;
             return View("Create", model);
         }
 

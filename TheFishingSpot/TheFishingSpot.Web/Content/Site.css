@@ -21,3 +21,7 @@ input,
 select,
 textarea {
 }
+
+#loader {
+    display: none;
+}
