@@ -18,13 +18,11 @@
         [Required]
         public string AuthorId { get; set; }
 
-        [Required]
         public virtual ApplicationUser Author { get; set; }
 
         [Required]
         public int NewsId { get; set; }
 
-        [Required]
         public virtual News News { get; set; }
     }
 }
