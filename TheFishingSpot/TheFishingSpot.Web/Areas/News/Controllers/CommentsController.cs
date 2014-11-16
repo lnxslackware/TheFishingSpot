@@ -27,7 +27,7 @@
             if (news == null)
             {
                 ViewBag.Error = "Unallowed call";
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
 
             var comments = news.Select(n => n.Comments)
@@ -42,7 +42,7 @@
             //    .ToList();
 
             //return this.Content("test");
-            return PartialView("_ShowComments", comments);
+            return this.PartialView("_ShowComments", comments);
         }
 
         [HttpGet]
@@ -54,7 +54,7 @@
                 NewsId = id
             };
 
-            return PartialView("_AddComment", commentModel);
+            return this.PartialView("_AddComment", commentModel);
         }
 
         [HttpPost]
@@ -82,7 +82,7 @@
             }
 
             ViewBag.Error = true;
-            return PartialView("_AddComment", comment);
+            return this.PartialView("_AddComment", comment);
         }
     }
 }

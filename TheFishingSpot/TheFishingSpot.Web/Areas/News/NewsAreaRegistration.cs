@@ -18,13 +18,13 @@ namespace TheFishingSpot.Web.Areas.News
                 "Comments",
                 "News/Comments/{action}/{id}",
                 new { controller = "Comments", action = "Index", id = UrlParameter.Optional }
-            );
+                );
 
             context.MapRoute(
                 "News_default",
                 "News/{action}/{id}",
                 new { controller = "News", action = "Index", id = UrlParameter.Optional }
-            );
+                );
         }
     }
 }

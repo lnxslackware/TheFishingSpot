@@ -5,7 +5,6 @@ namespace TheFishingSpot.Data
 
     public interface IFishingSpotData
     {
-
         IRepository<Fish> Fishes { get; }
 
         IRepository<News> News { get; }

@@ -3,15 +3,15 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
-    
+
     using AutoMapper.QueryableExtensions;
     using Microsoft.AspNet.Identity;
-    
+
     using TheFishingSpot.Data;
     using TheFishingSpot.Web.Areas.News.Models;
     using TheFishingSpot.Web.Controllers;
     using TheFishingSpot.Web.Infrastructure;
-    
+
     public class NewsController : BaseController
     {
         private readonly ISanitizer sanitizer;
@@ -19,7 +19,7 @@
         private const int PreviewNewsContentDisplayLength = 200;
 
         public NewsController(IFishingSpotData data, ISanitizer sanitizer)
-            :base(data)
+            : base(data)
         {
             this.sanitizer = sanitizer;
         }
@@ -36,7 +36,7 @@
                 .Take(DefaultPageSize).ToList();
 
             allNews.ForEach(n => n.Content = TrimAndSanitizeContent(n.Content));
-            
+
             return View(allNews);
         }
 

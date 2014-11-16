@@ -9,7 +9,6 @@ namespace TheFishingSpot.Data
 
     public class TheFishingSpotData : IFishingSpotData
     {
-
         private DbContext context;
         private IDictionary<Type, object> repositories;
 
