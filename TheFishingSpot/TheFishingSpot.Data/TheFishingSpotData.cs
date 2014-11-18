@@ -81,5 +81,13 @@ namespace TheFishingSpot.Data
                 return this.GetRepository<ApplicationUser>();
             }
         }
+
+        public DbContext Context
+        {
+            get
+            {
+                return this.context;
+            }
+        }
     }
 }

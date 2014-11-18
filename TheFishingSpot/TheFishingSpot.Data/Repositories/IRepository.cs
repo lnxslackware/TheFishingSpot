@@ -14,6 +14,8 @@ namespace TheFishingSpot.Data.Repositories
 
         void Delete(T entity);
 
+        void Delete(object id);
+
         void Detach(T entity);
 
         void SaveChanges();

@@ -43,6 +43,16 @@ namespace TheFishingSpot.Data.Repositories
         {
             this.ChangeEntityState(entity, EntityState.Deleted);
         }
+        
+        public virtual void Delete(object id)
+        {
+            var entity = this.GetById(id);
+
+            if (entity != null)
+            {
+                this.Delete(entity);
+            }
+        }
 
         public void Detach(T entity)
         {

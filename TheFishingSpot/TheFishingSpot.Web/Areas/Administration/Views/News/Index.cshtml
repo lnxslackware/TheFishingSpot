@@ -1,0 +1,10 @@
+﻿@using TheFishingSpot.Web.Areas.News.Models;
+@using TheFishingSpot.Web.Infrastructure.Helpers;
+@model NewsViewModel;
+@{
+    const string ControllerName = "News";
+    ViewBag.Title = ControllerName;
+}
+
+<h2>@ViewBag.Title</h2>
+@(Html.FullFeaturedGrid<NewsViewModel>(ControllerName, m => m.Id))
