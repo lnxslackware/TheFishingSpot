@@ -1,10 +1,12 @@
-﻿@model IEnumerable<TheFishingSpot.Web.Areas.News.Models.NewsViewModel>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model PagedList<TheFishingSpot.Web.Areas.News.Models.NewsViewModel>
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
 @foreach (var news in Model)
 {
     <div class="panel panel-primary">
@@ -22,3 +24,10 @@
         </div>
     </div>
 }
+
+<div class="row">
+    <div class="text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount News
+    </div>
+</div>

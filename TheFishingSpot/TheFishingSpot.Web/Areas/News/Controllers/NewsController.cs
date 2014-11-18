@@ -11,6 +11,7 @@
     using TheFishingSpot.Web.Areas.News.Models;
     using TheFishingSpot.Web.Controllers;
     using TheFishingSpot.Web.Infrastructure;
+    using PagedList;
 
     public class NewsController : BaseController
     {
@@ -26,18 +27,20 @@
 
         // GET: News/Home
         [HttpGet]
-        public ActionResult Index(int page = 0)
+        public ActionResult Index(int page = 1)
         {
             var allNews = this.Data.News.All()
                 .OrderByDescending(n => n.PublishDate)
                 .Project()
                 .To<NewsViewModel>()
-                .Skip(page * DefaultPageSize)
-                .Take(DefaultPageSize).ToList();
+                //.Skip((page - 1) * DefaultPageSize)
+                /*.Take(DefaultPageSize)*/.ToList();
 
-            allNews.ForEach(n => n.Content = TrimAndSanitizeContent(n.Content));
+            //allNews.ForEach(n => n.Content = TrimAndSanitizeContent(n.Content));
 
-            return View(allNews);
+            var pagedList = new PagedList<NewsViewModel>(allNews, page, DefaultPageSize);
+
+            return View(pagedList);
         }
 
         [HttpGet]

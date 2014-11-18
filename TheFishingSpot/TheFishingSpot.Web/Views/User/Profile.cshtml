@@ -1,0 +1,29 @@
+﻿@model TheFishingSpot.Web.Models.UserProfileViewModel
+@{
+    ViewBag.Title = String.Format("{0} Profile", Model.Username);
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row text-center">
+    <div class="col-md-3">
+        picture
+    </div>
+    <div class="col-md-9">
+        <p>
+            @Html.LabelFor(m => m.Username):
+            @Html.DisplayFor(m => m.Username)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.CatchedFishesCount):
+            @Html.DisplayFor(m => m.CatchedFishesCount)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.BiggestFish):
+            @Html.DisplayFor(m => m.BiggestFish)
+        </p>
+    </div>
+</div>
+<hr />
+<div class="row text-center">
+    @Html.Partial("_AddFish", Model)
+</div>

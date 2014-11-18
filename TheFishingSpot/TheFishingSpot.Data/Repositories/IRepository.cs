@@ -6,6 +6,8 @@ namespace TheFishingSpot.Data.Repositories
     {
         IQueryable<T> All();
 
+        T GetById(object id);
+
         void Add(T entity);
 
         void Update(T entity);

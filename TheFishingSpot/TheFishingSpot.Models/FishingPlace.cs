@@ -4,6 +4,9 @@ namespace TheFishingSpot.Models
 
     public class FishingPlace
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 

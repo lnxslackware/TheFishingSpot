@@ -63,5 +63,23 @@ namespace TheFishingSpot.Data
 
             return (IRepository<T>)this.repositories[typeOfRepository];
         }
+
+
+        public IRepository<FishingPlace> FishingPlaces
+        {
+            get
+            {
+                return this.GetRepository<FishingPlace>();
+            }
+        }
+
+
+        public IRepository<ApplicationUser> Users
+        {
+            get 
+            {
+                return this.GetRepository<ApplicationUser>();
+            }
+        }
     }
 }

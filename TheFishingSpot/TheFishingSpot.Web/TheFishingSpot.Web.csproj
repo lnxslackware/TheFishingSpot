@@ -99,6 +99,14 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -199,11 +207,14 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FishIputViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -213,6 +224,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\imgs\loader.gif" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -451,6 +463,10 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\User\_AddFish.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

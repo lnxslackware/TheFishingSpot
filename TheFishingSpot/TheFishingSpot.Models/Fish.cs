@@ -13,7 +13,13 @@
 
         [Required]
         public FishType Type { get; set; }
-        public double MinimalAllowedSize { get; set; }
+
+        public double Weight { get; set; }
+        
         public string AdditionalInfo { get; set; }
+
+        public int FishingPlaceId { get; set; }
+
+        public virtual FishingPlace FishingPlace { get; set; }
     }
 }

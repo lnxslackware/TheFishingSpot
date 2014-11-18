@@ -11,6 +11,10 @@ namespace TheFishingSpot.Data
 
         IRepository<Comment> Comments { get; }
 
+        IRepository<FishingPlace> FishingPlaces { get; }
+
+        IRepository<ApplicationUser> Users { get; }
+
         int SaveChanges();
     }
 }

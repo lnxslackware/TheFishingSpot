@@ -21,8 +21,12 @@ namespace TheFishingSpot.Data
         }
 
         public IDbSet<Fish> Fishes { get; set; }
+        
         public IDbSet<News> News { get; set; }
+        
         public IDbSet<Comment> Comments { get; set; }
+
+        public IDbSet<FishingPlace> FishingPlaces { get; set; }
 
         public new void SaveChanges()
         {
